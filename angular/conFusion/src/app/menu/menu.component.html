@@ -2,6 +2,18 @@
      fxLayout="column"
      fxLayoutGap="10px">
 
+  <!--
+<mat-list fxFlex>
+    <mat-list-item *ngFor="let dish of dishes">
+      <img matListAvatar src={{dish.image}} alt={{dish.name}}>
+      <h1 matLine> {{dish.name}} </h1>
+      <p matLine>
+        <span> {{dish.description}} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+
+  -->
   <div fxFlex>
     <div>
       <h3>Menu</h3>
@@ -20,7 +32,7 @@
     </mat-grid-list>
   </div>
 
-  <div fxFlex *ngIf="selectedDish">
+  <!-- <div fxFlex *ngIf="selectedDish">
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -37,6 +49,7 @@
         <button mat-button>SHARE</button>
       </mat-card-actions>
     </mat-card>
-  </div>
+  </div> -->
+  <app-dishdetail></app-dishdetail>
 
 </div>
