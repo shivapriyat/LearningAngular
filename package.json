@@ -20,5 +20,12 @@
   "homepage": "https://github.com/shivapriyat/LearningAngular#readme",
   "devDependencies": {
     "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "@angular/animations": "^6.1.7",
+    "@angular/cdk": "^6.4.7",
+    "@angular/flex-layout": "^6.0.0-beta.18",
+    "@angular/material": "^6.4.7",
+    "hammerjs": "^2.0.8"
   }
 }
