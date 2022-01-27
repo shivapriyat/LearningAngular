@@ -13,10 +13,14 @@ npm install @angular/cdk@6.4.7 --save <br/>
 npm install --save @angular/animations@6.1.7 <br/>
 npm install --save hammerjs@2.0.8 <br/>
 #### Configure to use Material Design Icons in index.html
+```
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <br/>
-#### Configure Angular Project to use Flex Layout
+```
+#### Configure Angular Project to use Flex Layout <br/>
 npm install --save @angular/flex-layout@6.0.0-beta.18 <br/>
 #### Updating AppModule
+
+```
 vi src/app/app.module.ts<br/>
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';<br/>
 import { MatToolbarModule } from '@angular/material/toolbar'; <br/>
@@ -37,6 +41,7 @@ import 'hammerjs';<br/>
   ], <br/>
     
     . . .<br/>
+```    
 #### Adding a Material Toolbar
 vi app.component.html <br/>
 <mat-toolbar color="primary"> <span>Ristorante Con Fusion</span> </mat-toolbar><br/>
