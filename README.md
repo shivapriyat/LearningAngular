@@ -126,8 +126,119 @@ styles.css
     margin: 20px;
     display:flex;
 }
-
-
+```
+## Event Binding
+vi menu.component.html
+```
+<mat-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)">
+```
+vi menu.component.ts
+```
+onSelect(dish: Dish) {
+    this.selectedDish = dish;
+}
+```
+## Property Binding between Components (menu to dishDetail)
+vi menu.component.html
+```
+<app-dishdetail [dish] = "selectedDish"></app-dishdetail>
+```
+vi menu.component.ts
+```
+selectedDish: Dish;
+```
+vi dishdetail.component.ts
+```
+ @Input()
+ dish: Dish;
 ```
 
+## Angular Services
+```
+mkdir app/services
+ng generate service services/dish
+```
+vi dish.service.ts
+```
+import { Dish } from '../shared/dish';
+import { DISHES } from '../shared/dishes';
+getDishes(): Dish[] {
+    return DISHES;
+}
+```
+vi app.module.ts 
+```
+import { DishService } from './services/dish.service';
+@NgModule({
 
+providers: [DishService],
+```
+
+vi menu.component.ts
+```
+import { DishService } from '../services/dish.service';
+
+constructor(private dishService: DishService) { }
+  
+ngOnInit() {
+    this.dishes = this.dishService.getDishes();
+}
+```
+## Angular Routing
+```
+ng generate module app-routing
+```
+vi app-routing/routes.ts
+```
+import { Routes } from '@angular/router';
+import { HomeComponent } from '../home/home.component';
+import { MenuComponent } from '../menu/menu.component';
+export const routes: Routes = [
+  { path: 'home',  component: HomeComponent },
+  { path: 'menu',     component: MenuComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
+];
+```
+
+vi  app-routing.module.ts
+```
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
+import { routes } from './routes';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [ RouterModule ],
+  declarations: []
+})
+export class AppRoutingModule { }
+```
+
+vi app.component.html
+```
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+```
+vi app.module.ts
+```
+import { AppRoutingModule } from './app-routing/app-routing.module';
+@NgModule({
+  . . .  
+    imports: [
+    . . .,
+    AppRoutingModule
+  ],  
+  . . .  
+})
+```
+vi header.component.html
+```
+<a mat-button routerLink="/home"><span class="fa fa-home fa-lg"></span> Home</a>
+<a mat-button routerLink="/menu"><span class="fa fa-list fa-lg"></span> Menu</a>
+```
