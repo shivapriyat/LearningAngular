@@ -54,6 +54,80 @@ body {
   font-family: Roboto, sans-serif;   
 }
 ```
+## Create Angular Component
+```
+ng generate component menu
 
+vi app.component.html
+<app-menu></app-menu>
+
+vi src/app/shared/dish.ts
+export class Dish {
+    id: string;
+    name: string;
+    image: string;
+    category: string;
+    featured: boolean;
+    label: string;
+    price: string;
+    description: string;
+}
+vi menu.component.ts
+import { Dish } from '../shared/dish';
+export class MenuComponent implements OnInit {
+
+  dishes: Dish[] = [
+    {
+      id: '0',
+      name: 'Uthappizza',
+      image: '/assets/images/uthappizza.png',
+      category: 'mains',
+      featured: true,
+      label: 'Hot',
+      price: '4.99',
+      // tslint:disable-next-line:max-line-length
+      description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
+    }, ....
+    ];
+    
+    vi  menu.component.html 
+    <div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+
+  <mat-list fxFlex>
+    <mat-list-item *ngFor="let dish of dishes">
+      <img matListAvatar src={{dish.image}} alt={{dish.name}}>
+      <h1 matLine> {{dish.name}} </h1>
+      <p matLine>
+        <span> {{dish.description}} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+
+</div>
+
+vi app.module.ts 
+. . .
+
+import { MatListModule } from '@angular/material/list';
+
+. . .
+
+  imports: [
+    . . .,
+    MatListModule,
+    . . .
+  ],
+
+. . .
+styles.css
+.container {
+    margin: 20px;
+    display:flex;
+}
+
+
+```
 
 
