@@ -242,3 +242,41 @@ vi header.component.html
 <a mat-button routerLink="/home"><span class="fa fa-home fa-lg"></span> Home</a>
 <a mat-button routerLink="/menu"><span class="fa fa-list fa-lg"></span> Menu</a>
 ```
+## Adding Route Params and navigation between menu and dishdetail
+vi routes.ts
+```
+{ path: 'dishdetail/:id',     component: DishdetailComponent },
+```
+vi menu.component.html 
+ ```
+ <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
+ and remove last line <app-detail></app-detail
+  ```
+  vi dishdetail.component.ts 
+  ```
+import { DishService } from '../services/dish.service';
+import { Params, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+ 
+ export class DishdetailComponent implements OnInit {
+  dish: Dish;
+
+  constructor(private dishservice: DishService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location) { }
+
+  ngOnInit() {
+    const id = this.activatedRoute.snapshot.params['id'];
+    this.dish = this.dishservice.getDish(id);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  ```
+  vi dishdetail.component.html
+  ```
+  <mat-card-actions>
+  <button mat-button (click)="goBack()">BACK</button>
+  ```
