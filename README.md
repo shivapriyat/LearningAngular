@@ -280,3 +280,50 @@ import { Location } from '@angular/common';
   <mat-card-actions>
   <button mat-button (click)="goBack()">BACK</button>
   ```
+## Create Angular Dialogs
+```
+ng g component login
+vi login.component.ts
+import {MatDialog, MatDialogRef} from '@angular/material';
+vi login.component.html
+<mat-toolbar color="primary">
+    Login
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
+```
+vi app.module.ts
+```
+import { MatDialogModule } from '@angular/material/dialog';
+@NgModule({
+. . .
+
+  imports: [
+    . . .,
+    MatDialogModule,
+    . . .
+  ],
+  
+  . . .
+  
+  entryComponents: [
+        LoginComponent
+  ],
+. . .
+  
+})
+```
+```
+vi header.component.html
+<span class="flex-spacer"></span>
+  <a mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+vi header.component.ts
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { LoginComponent } from '../login/login.component';
+
+ constructor(public dialog: MatDialog ) { }
+ 
+ openLoginForm() {
+    this.dialog.open(LoginComponent, {width: '500px', height: '450px'});
+  }
+```
