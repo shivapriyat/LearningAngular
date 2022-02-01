@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material';
 import { FormsModule } from '@angular/forms'; 
 
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -63,6 +64,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSliderModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     AppRoutingModule
