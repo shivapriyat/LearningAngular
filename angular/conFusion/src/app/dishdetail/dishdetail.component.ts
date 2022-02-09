@@ -23,6 +23,7 @@ export class DishdetailComponent implements OnInit {
   prev: string;
   next: string;
   errMess: string;
+  dishcopy: Dish;
 
   constructor(private dishservice: DishService,
     private activatedRoute: ActivatedRoute,
@@ -79,7 +80,7 @@ export class DishdetailComponent implements OnInit {
     /*const id = this.activatedRoute.snapshot.params['id'];
     this.dishservice.getDish(id).subscribe(dish => this.dish = dish);*/
     this.activatedRoute.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); }, errmess => this.errMess = <any>errmess);
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); }, errmess => this.errMess = <any>errmess);
   }
 
   setPrevNext(dishId: string) {
@@ -102,10 +103,16 @@ export class DishdetailComponent implements OnInit {
         rating: this.commentsForm.value.rating,
         date: todayStr
       }
-      this.dish.comments.push(commentInput);
+      //this.dish.comments.push(commentInput);
+      this.dishcopy.comments.push(commentInput);
+      this.dishservice.putDish(this.dishcopy)
+        .subscribe(dish => {
+          this.dish = dish; this.dishcopy = dish;
+        },
+          errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
 
     }
-    
+
     this.commentsForm.reset();
     this.commentsForm.reset({
       author: ['', [Validators.required, Validators.minLength(2)]],
