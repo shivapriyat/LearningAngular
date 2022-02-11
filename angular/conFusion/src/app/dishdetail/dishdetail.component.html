@@ -2,8 +2,8 @@
   fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
   <div fxFlex="100">
-    <div *ngIf="dish"  [@visibility]="visibility">
-      <h3 *ngIf="dish"  [@visibility]="visibility">{{dish.name | uppercase}}</h3>
+    <div *ngIf="dish"  [@visibility]="visibility" [@expand]>
+      <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
       <hr>
     </div>
 
@@ -40,7 +40,7 @@
   </div>
 
   <div fxFlex="40">
-    <mat-card *ngIf="dish">
+    <mat-card *ngIf="dish" [@visibility]="visibility" [@expand]>
       <mat-card-header>
         <mat-card-title>
           <h3>Comments</h3>
