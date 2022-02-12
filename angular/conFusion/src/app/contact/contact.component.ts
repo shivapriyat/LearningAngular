@@ -24,10 +24,11 @@ export class ContactComponent implements OnInit {
   errMess: string;
   feedbackcopy: Feedback;
   showSpinner: boolean;
+  isSuccessRes: boolean;
 
   constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
     this.createForm();
-    this.showSpinner = false;
+    this.showSpinner = false; this.isSuccessRes=false;
   }
   createForm() {
     /*this.feedbackForm = this.fb.group({
@@ -110,11 +111,15 @@ export class ContactComponent implements OnInit {
   };
   onSubmit() {
     this.showSpinner = true;
+    this.isSuccessRes = false;
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
     this.feedbackService.postFeedback(this.feedback)
       .subscribe(feed => {
-        this.feedback = feed; this.feedbackcopy = feed; this.showSpinner = false;
+        this.feedback = feed; this.feedbackcopy = feed; this.showSpinner = false; this.isSuccessRes = true;
+        setTimeout(()=> {
+          this.isSuccessRes = false;
+        },5000);
       },
         errmess => { this.feedback = null; this.feedbackcopy = null; this.showSpinner = false; this.errMess = <any>errmess; });
 
